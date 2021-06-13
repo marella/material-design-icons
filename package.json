@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "workspaces": [
+    "font",
+    "scripts",
+    "svg"
+  ],
+  "scripts": {
+    "clean": "npm run clean:svg",
+    "clean:svg": "npx @material-design-icons/scripts delete svg",
+    "download": "npm run download:font && npm run download:svg && npm run download:metadata",
+    "download:font": "npx @material-design-icons/scripts download font",
+    "download:svg": "npx @material-design-icons/scripts download svg",
+    "download:metadata": "npx @material-design-icons/scripts download metadata",
+    "build": "npm run build:font && npm run build:svg",
+    "build:font": "npm run build -w font",
+    "build:svg": "npm run build -w svg",
+    "patch": "npm version patch -w font -w svg",
+    "publish": "npm publish -w font -w svg"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@material-design-icons/scripts",
+  "version": "0.0.0",
+  "description": "Scripts to download material design icons.",
+  "files": [
+    "*.js"
+  ],
+  "bin": "index.js",
+  "dependencies": {
+    "commander": "^7.2.0",
+    "del": "^6.0.0",
+    "got": "^11.8.2"
+  },
+  "type": "module",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marella/material-design-icons.git",
+    "directory": "scripts"
+  },
+  "bugs": {
+    "url": "https://github.com/marella/material-design-icons/issues"
+  },
+  "homepage": "https://github.com/marella/material-design-icons/tree/main/scripts#readme",
+  "keywords": [
+    "material-design-icons",
+    "material-icons",
+    "material-design",
+    "icons",
+    "scripts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
