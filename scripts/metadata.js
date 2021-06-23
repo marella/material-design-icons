@@ -1,5 +1,5 @@
-import * as fs from 'fs/promises';
-import path from 'path';
+import * as fs from 'node:fs/promises';
+import path from 'node:path';
 
 import { get, sortMap } from './utils.js';
 
