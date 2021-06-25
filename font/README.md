@@ -2,6 +2,8 @@
 
 Icon fonts and CSS for material design icons.
 
+> This package [![install size](https://packagephobia.com/badge?p=@material-design-icons/font)](https://packagephobia.com/result?p=@material-design-icons/font) doesn't support [older browsers](https://caniuse.com/woff2) such as Internet Explorer. If you need to support those, use [`material-icons`](https://www.npmjs.com/package/material-icons) package [![install size](https://packagephobia.com/badge?p=material-icons)](https://packagephobia.com/result?p=material-icons)
+
 > For SVGs, see [`@material-design-icons/svg`](https://www.npmjs.com/package/@material-design-icons/svg)
 
 - [Installation](#installation)

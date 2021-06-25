@@ -24,8 +24,7 @@ $material-design-icons-font-path: './' !default;
     font-style: normal;
     font-weight: 400;
     font-display: block;
-    src: url('#{$font-file}.woff2') format('woff2'),
-      url('#{$font-file}.woff') format('woff');
+    src: url('#{$font-file}.woff2') format('woff2');
   }
 
   .#{$class-name} {

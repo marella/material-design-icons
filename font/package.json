@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Icon fonts and CSS for material design icons.",
   "files": [
-    "*.{css,scss,woff,woff2}"
+    "*.{css,scss,woff2}"
   ],
   "browser": "index.css",
   "sass": "index.scss",
