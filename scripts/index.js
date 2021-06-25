@@ -21,8 +21,9 @@ const downloadCommand = program.command('download');
 downloadCommand
   .command('font')
   .option('--to <directory>', 'download directory', 'font')
+  .option('--evergreen', 'download fonts for evergreen browsers only')
   .action((options) => {
-    downloadFonts(options.to);
+    downloadFonts(options.to, options.evergreen);
   });
 
 downloadCommand

@@ -2,7 +2,7 @@ import path from 'node:path';
 
 import { get, apply, downloadAll, assertEquals } from './utils.js';
 
-const fonts = [
+const FONTS = [
   'Material Icons',
   'Material Icons Outlined',
   'Material Icons Round',
@@ -10,7 +10,7 @@ const fonts = [
   'Material Icons Two Tone',
 ];
 
-const agents = {
+const AGENTS = {
   woff2:
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36', // chrome 70
   woff: 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko', // ie 11
@@ -18,9 +18,10 @@ const agents = {
 
 const baseUrl = 'https://fonts.googleapis.com/icon?family=';
 
-export const downloadFonts = async (dir) => {
+export const downloadFonts = async (dir, evergreen) => {
   const fontFormats = [];
-  for (const name of fonts) {
+  const agents = evergreen ? { woff2: AGENTS['woff2'] } : AGENTS;
+  for (const name of FONTS) {
     for (const format of Object.keys(agents)) {
       fontFormats.push([name, format]);
     }
@@ -33,7 +34,7 @@ export const downloadFonts = async (dir) => {
 
 const getFontUrl = async (name, format) => {
   const url = baseUrl + name.replaceAll(' ', '+');
-  const agent = agents[format];
+  const agent = AGENTS[format];
   console.log(`Fetching download URL for '${name}' font in '${format}' format`);
   const css = await get(url, { agent });
   const font = parseCss(css);
