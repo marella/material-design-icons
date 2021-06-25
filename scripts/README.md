@@ -1,4 +1,4 @@
-# Material Design Icons
+# [@material-design-icons/scripts](https://github.com/marella/material-design-icons/tree/main/scripts)
 
 Scripts to download material design icons.
 

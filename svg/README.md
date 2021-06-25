@@ -1,4 +1,4 @@
-# Material Design Icons
+# [@material-design-icons/svg](https://github.com/marella/material-design-icons/tree/main/svg)
 
 Optimized SVGs for material design icons.
 

@@ -1,4 +1,4 @@
-# Material Design Icons
+# [@material-design-icons/font](https://github.com/marella/material-design-icons/tree/main/font)
 
 Icon fonts and CSS for material design icons.
 
