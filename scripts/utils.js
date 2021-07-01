@@ -1,4 +1,5 @@
 import * as fs from 'node:fs/promises';
+import path from 'node:path';
 import del from 'del';
 import got from 'got';
 
@@ -23,7 +24,7 @@ export const downloadAll = async (
 };
 
 const download = async (url, file) => {
-  console.log(`Downloading ${file}`);
+  console.log(`Downloading ${path.relative('', file)}`);
   const data = await get(url, { raw: true });
   await fs.writeFile(file, data);
 };
@@ -43,7 +44,7 @@ export const mkdirs = async (dirs) => {
   await map(dirs, async (dir) => {
     try {
       await fs.mkdir(dir);
-      console.log(`Created ${dir}`);
+      console.log(`Created ${path.relative('', dir)}`);
     } catch (e) {
       if (e.code !== 'EEXIST') {
         throw e;
@@ -54,8 +55,8 @@ export const mkdirs = async (dirs) => {
 
 export const remove = async (paths) => {
   const deleted = await del(paths);
-  deleted.forEach((path) => {
-    console.log(`Deleted ${path}`);
+  deleted.forEach((p) => {
+    console.log(`Deleted ${path.relative('', p)}`);
   });
 };
 

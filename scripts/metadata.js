@@ -4,14 +4,18 @@ import path from 'node:path';
 import { get, sortMap } from './utils.js';
 
 const url = 'https://fonts.google.com/metadata/icons';
+const REMOVED = 0b100;
+const UPDATED = 0b010;
+const ADDED = 0b001;
 
 export const downloadVersions = async (dir) => {
   const file = path.resolve(dir, 'versions.json');
-  console.log(`Downloading ${file}`);
+  console.log(`Downloading ${path.relative('', file)}`);
   const versions = await getVersions();
-  await logChanges(file, versions);
+  const status = await checkChanges(file, versions);
   await fs.writeFile(file, JSON.stringify(versions, null, 2));
   console.log('Done');
+  return status;
 };
 
 export const getVersions = async () => {
@@ -29,7 +33,7 @@ const getMetadata = async () => {
   return JSON.parse(data);
 };
 
-const logChanges = async (file, latest) => {
+const checkChanges = async (file, latest) => {
   let existing;
   try {
     existing = JSON.parse(await fs.readFile(file));
@@ -37,23 +41,28 @@ const logChanges = async (file, latest) => {
     if (e.code !== 'ENOENT') {
       console.error(e.message);
     }
-    return;
+    return ADDED;
   }
+  let status = 0;
   const { removed, updated, added } = getChanges(existing, latest);
   if (removed.length === 0 && updated.length === 0 && added.length === 0) {
     console.log('No changes');
-    return;
+    return status;
   }
   console.log('Changes:');
   if (removed.length !== 0) {
     console.log(`- Remove ${removed.length} icons: ${names(removed)}`);
+    status |= REMOVED;
   }
   if (updated.length !== 0) {
     console.log(`- Update ${updated.length} icons`);
+    status |= UPDATED;
   }
   if (added.length !== 0) {
     console.log(`- Add ${added.length} icons: ${names(added)}`);
+    status |= ADDED;
   }
+  return status;
 };
 
 const getChanges = (existing, latest) => {

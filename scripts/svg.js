@@ -70,6 +70,10 @@ const checkCounts = async (dirs, expected) => {
   console.log('Checking file counts');
   await map(dirs, async (dir) => {
     const actual = (await fs.readdir(dir)).length;
-    assertEquals(actual, expected, `number of files in ${dir}`);
+    assertEquals(
+      actual,
+      expected,
+      `number of files in ${path.relative('', dir)}`
+    );
   });
 };

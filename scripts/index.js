@@ -22,30 +22,34 @@ downloadCommand
   .command('font')
   .option('--to <directory>', 'download directory', 'font')
   .option('--evergreen', 'download fonts for evergreen browsers only')
-  .action((options) => {
-    downloadFonts(options.to, options.evergreen);
+  .action(async (options) => {
+    await downloadFonts(options.to, options.evergreen);
   });
 
 downloadCommand
   .command('svg')
   .option('--to <directory>', 'download directory', 'svg')
-  .action((options) => {
-    downloadSvgs(options.to);
+  .action(async (options) => {
+    await downloadSvgs(options.to);
   });
 
 downloadCommand
   .command('metadata')
   .option('--to <directory>', 'download directory', '_data')
-  .action((options) => {
-    downloadVersions(options.to);
+  .option('--status', 'set exit status based on metadata changes')
+  .action(async (options) => {
+    const status = await downloadVersions(options.to);
+    if (options.status) {
+      process.exitCode = status;
+    }
   });
 
 program
   .command('delete')
   .command('svg')
   .option('--in <directory>', 'svg directory', 'svg')
-  .action((options) => {
-    deleteSvgs(options.in);
+  .action(async (options) => {
+    await deleteSvgs(options.in);
   });
 
-program.parse();
+await program.parseAsync();
