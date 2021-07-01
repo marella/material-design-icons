@@ -6,6 +6,7 @@
     "svg"
   ],
   "scripts": {
+    "check": "npm run download:metadata -- --status",
     "clean": "npm run clean:svg",
     "clean:svg": "npx @material-design-icons/scripts delete svg",
     "download": "npm run download:font && npm run download:svg && npm run download:metadata",
