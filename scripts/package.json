@@ -2,12 +2,12 @@
   "name": "@material-design-icons/scripts",
   "version": "0.2.0",
   "description": "Scripts to download material design icons.",
+  "bin": "index.js",
   "files": [
     "*.js"
   ],
-  "bin": "index.js",
   "dependencies": {
-    "commander": "^7.2.0",
+    "commander": "^8.0.0",
     "del": "^6.0.0",
     "got": "^11.8.2"
   },
@@ -21,11 +21,12 @@
   "bugs": {
     "url": "https://github.com/marella/material-design-icons/issues"
   },
-  "homepage": "https://github.com/marella/material-design-icons/tree/main/scripts#readme",
+  "homepage": "https://github.com/marella/material-design-icons/tree/main/scripts",
   "keywords": [
     "material-design-icons",
     "material-icons",
     "material-design",
+    "material",
     "icons",
     "scripts"
   ],

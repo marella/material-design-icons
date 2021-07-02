@@ -36,12 +36,12 @@ For example, SVGs for `face` icon are located at:
 
 ### React
 
-If you are using [`@svgr/webpack`](https://www.npmjs.com/package/@svgr/webpack), you can import SVGs directly as React components:
+You can use [`@svgr/webpack`](https://www.npmjs.com/package/@svgr/webpack) to import SVGs as React components:
 
 ```js
 import Face from '@material-design-icons/svg/filled/face.svg';
 
-// Face is an actual React component that renders the SVG
+// Face is a React component that renders the SVG
 
 function App() {
   return (
@@ -56,6 +56,30 @@ If you are using `@svgr/webpack` with `file-loader` (example: [Create React App]
 
 ```js
 import { ReactComponent as Face } from '@material-design-icons/svg/filled/face.svg';
+```
+
+### Vue
+
+You can use [`@svgv/webpack`](https://www.npmjs.com/package/@svgv/webpack) to import SVGs as Vue components:
+
+```html
+<template>
+  <div class="App">
+    <Face />
+  </div>
+</template>
+
+<script>
+import Face from '@material-design-icons/svg/filled/face.svg';
+
+// Face is a Vue component that renders the SVG
+
+export default {
+  components: {
+    Face,
+  },
+};
+</script>
 ```
 
 ### Styling
@@ -83,4 +107,4 @@ We'd love attribution in your app's *about* screen, but it's not required.
 
 [releases]: https://github.com/marella/material-design-icons/releases
 [license]: https://github.com/marella/material-design-icons/blob/main/svg/LICENSE
-[demo]: https://marella.github.io/material-design-icons/demo/?format=svg
+[demo]: https://marella.github.io/material-design-icons/demo/svg/

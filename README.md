@@ -2,7 +2,9 @@
 
 Optimized SVGs and icon fonts for material design icons.
 
-This is a monorepo to publish material design icons in the following formats:
+This monorepo is used for publishing material design icons in the following formats:
 
-- [svg](https://github.com/marella/material-design-icons/tree/main/svg#readme)
-- [font](https://github.com/marella/material-design-icons/tree/main/font#readme)
+Package | Description
+:--- | :---
+[`@material-design-icons/svg`](https://github.com/marella/material-design-icons/tree/main/svg#readme) | Optimized SVGs for material design icons.
+[`@material-design-icons/font`](https://github.com/marella/material-design-icons/tree/main/font#readme) | Icon fonts and CSS for material design icons.

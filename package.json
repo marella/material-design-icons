@@ -7,6 +7,7 @@
   ],
   "scripts": {
     "check": "npm run download:metadata -- --status",
+    "update": "npm run clean && npm run download && npm run build",
     "clean": "npm run clean:svg",
     "clean:svg": "npx @material-design-icons/scripts delete svg",
     "download": "npm run download:font && npm run download:svg && npm run download:metadata",
@@ -16,7 +17,9 @@
     "build": "npm run build:font && npm run build:svg",
     "build:font": "npm run build -w font",
     "build:svg": "npm run build -w svg",
-    "patch": "npm version patch -w font -w svg",
+    "version": "npm version -w font -w svg",
+    "postversion": "VERSION=$(node -p \"require('./svg/package.json').version\") npm run git-commit-tag",
+    "git-commit-tag": "git commit -am $VERSION && git tag -a v$VERSION -m $VERSION",
     "publish": "npm publish -w font -w svg"
   }
 }

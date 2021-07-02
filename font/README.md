@@ -110,4 +110,4 @@ We'd love attribution in your app's *about* screen, but it's not required.
 
 [releases]: https://github.com/marella/material-design-icons/releases
 [license]: https://github.com/marella/material-design-icons/blob/main/font/LICENSE
-[demo]: https://marella.github.io/material-design-icons/demo/
+[demo]: https://marella.github.io/material-design-icons/demo/font/
