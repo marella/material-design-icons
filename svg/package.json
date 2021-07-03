@@ -6,7 +6,7 @@
     "{filled,outlined,round,sharp,two-tone}/*.svg"
   ],
   "scripts": {
-    "build": "svgo --config svgo.config.js --recursive ."
+    "build": "svgo --config svgo.config.js --quiet --recursive ."
   },
   "devDependencies": {
     "svgo": "^2.3.1"
