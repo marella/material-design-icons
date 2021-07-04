@@ -18,7 +18,7 @@
     "build:font": "npm run build -w font",
     "build:svg": "npm run build -w svg",
     "version": "npm version -w font -w svg",
-    "postversion": "VERSION=$(node -p \"require('./svg/package.json').version\") npm run git-commit-tag",
+    "postversion": "npm install && VERSION=$(node -p \"require('./svg/package.json').version\") npm run git-commit-tag",
     "git-commit-tag": "git commit -am $VERSION && git tag -a v$VERSION -m $VERSION",
     "publish": "npm publish -w font -w svg"
   }
