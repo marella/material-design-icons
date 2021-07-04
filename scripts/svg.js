@@ -2,7 +2,15 @@ import * as fs from 'node:fs/promises';
 import path from 'node:path';
 
 import { getVersions } from './metadata.js';
-import { map, downloadAll, mkdirs, remove, assertEquals } from './utils.js';
+import {
+  map,
+  filter,
+  downloadAll,
+  mkdirs,
+  remove,
+  exists,
+  assertEquals,
+} from './utils.js';
 
 const styles = ['filled', 'outlined', 'round', 'sharp', 'two-tone'];
 
@@ -28,6 +36,7 @@ export const downloadSvgs = async (dir) => {
   await downloadAll(downloads, { ignoreExisting: true });
   await checkSvgs(dirs);
   await checkCounts(dirs, Object.keys(versions).length);
+  await checkDownloads(downloads);
   console.log('Done');
 };
 
@@ -76,4 +85,13 @@ const checkCounts = async (dirs, expected) => {
       `number of files in ${path.relative('', dir)}`
     );
   });
+};
+
+const checkDownloads = async (downloads) => {
+  console.log('Checking downloads');
+  const missing = await filter(
+    downloads,
+    async ([_, file]) => !(await exists(file))
+  );
+  assertEquals(missing.length, 0, 'missing downloads');
 };

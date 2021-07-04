@@ -34,7 +34,7 @@ const download = async (url, file) => {
 /**
  * @see https://github.com/jprichardson/node-fs-extra/blob/master/lib/path-exists/index.js
  */
-const exists = async (path) =>
+export const exists = async (path) =>
   fs
     .access(path)
     .then(() => true)
@@ -82,7 +82,7 @@ export const map = async (values, predicate) => {
   return await apply(predicate, values);
 };
 
-const filter = async (values, predicate) => {
+export const filter = async (values, predicate) => {
   const results = await map(values, predicate);
   return values.filter((_, i) => results[i]);
 };
