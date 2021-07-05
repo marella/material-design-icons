@@ -32,9 +32,10 @@ export const downloadSvgs = async (dir) => {
   await mkdirs(dirs);
   console.log('Fetching metadata');
   const versions = await getVersions();
-  console.log('Downloading SVGs');
   const downloads = getDownloads(versions, styleDirs);
+  console.log('::group::Downloading SVGs');
   await downloadAll(downloads, { ignoreExisting: true });
+  console.log('::endgroup::');
   await checkSvgs(dirs);
   await checkCounts(dirs, Object.keys(versions).length);
   await checkDownloads(downloads);
