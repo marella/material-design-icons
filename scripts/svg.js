@@ -1,5 +1,6 @@
 import * as fs from 'node:fs/promises';
 import path from 'node:path';
+import isSvg from 'is-svg';
 
 import { getVersions } from './metadata.js';
 import {
@@ -59,7 +60,7 @@ const checkSvgs = async (dirs) => {
     const files = await fs.readdir(dir);
     await map(files, async (file) => {
       file = path.resolve(dir, file);
-      if (await isSvg(file)) {
+      if (await isSvgFile(file)) {
         return;
       }
       await remove(file);
@@ -67,12 +68,12 @@ const checkSvgs = async (dirs) => {
   });
 };
 
-const isSvg = async (file) => {
+const isSvgFile = async (file) => {
   if (!file.endsWith('.svg')) {
     return false;
   }
   const svg = (await fs.readFile(file)).toString();
-  return svg.startsWith('<svg') && svg.endsWith('</svg>');
+  return svg.startsWith('<svg') && svg.endsWith('</svg>') && isSvg(svg);
 };
 
 const checkCounts = async (dirs, expected) => {
