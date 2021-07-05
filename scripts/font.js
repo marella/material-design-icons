@@ -1,6 +1,9 @@
 import path from 'node:path';
+import { promisify } from 'node:util';
+import fontkit from 'fontkit';
 
-import { get, apply, downloadAll, assertEquals } from './utils.js';
+import { getVersions } from './metadata.js';
+import { get, map, apply, downloadAll, assertEquals } from './utils.js';
 
 const FONTS = [
   'Material Icons',
@@ -29,6 +32,7 @@ export const downloadFonts = async (dir, evergreen) => {
   const urls = await apply(getFontUrl, fontFormats);
   const downloads = urls.map(([url, file]) => [url, path.resolve(dir, file)]);
   await downloadAll(downloads, { concurrency: 2 });
+  await checkFonts(downloads);
   console.log('Done');
 };
 
@@ -52,6 +56,47 @@ const parseCss = (css) => {
   const extension = url.substring(url.lastIndexOf('.') + 1);
   assertEquals(extension, format, 'font extension');
   return { name, url, format };
+};
+
+const checkFonts = async (downloads) => {
+  console.log('Checking fonts');
+  const versions = await getVersions();
+  const files = downloads.map(([_, file]) => file);
+  await map(files, async (file) => {
+    const ligatures = await processFont(file);
+    for (const name of Object.keys(versions)) {
+      if (!ligatures[name]) {
+        throw new Error(`Icon ${name} not found in ${path.relative('', file)}`);
+      }
+    }
+  });
+};
+
+const processFont = async (file) => {
+  const open = promisify(fontkit.open);
+  const font = await open(file);
+  const ligatures = {};
+  font.GSUB.lookupList.toArray().forEach(({ lookupType, subTables }) => {
+    if (lookupType === 4) {
+      subTables.forEach(({ coverage: { rangeRecords }, ligatureSets }) => {
+        const prefixes = [];
+        rangeRecords.forEach(({ start, end }) => {
+          for (let i = start; i <= end; i++) {
+            prefixes.push(i);
+          }
+        });
+        ligatureSets.toArray().forEach((ligatureSet, i) => {
+          ligatureSet.forEach(({ components }) => {
+            const ligature = [prefixes[i], ...components]
+              .map((v) => font.stringsForGlyph(v)[0])
+              .join('');
+            ligatures[ligature] = true;
+          });
+        });
+      });
+    }
+  });
+  return ligatures;
 };
 
 const kebabCase = (s) => s.toLowerCase().replaceAll(' ', '-');

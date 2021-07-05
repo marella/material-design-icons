@@ -9,6 +9,7 @@
   "dependencies": {
     "commander": "8.0.0",
     "del": "6.0.0",
+    "fontkit": "1.8.1",
     "got": "11.8.2"
   },
   "type": "module",
