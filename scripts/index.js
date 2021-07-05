@@ -37,8 +37,9 @@ downloadCommand
   .command('metadata')
   .option('--to <directory>', 'download directory', '_data')
   .option('--status', 'set exit status based on metadata changes')
+  .option('--dry-run', "don't save changes")
   .action(async (options) => {
-    const status = await downloadVersions(options.to);
+    const status = await downloadVersions(options.to, options.dryRun);
     if (options.status) {
       process.exitCode = status;
     }

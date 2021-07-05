@@ -8,12 +8,14 @@ const REMOVED = 0b100;
 const UPDATED = 0b010;
 const ADDED = 0b001;
 
-export const downloadVersions = async (dir) => {
+export const downloadVersions = async (dir, dryRun) => {
   const file = path.resolve(dir, 'versions.json');
   console.log(`Downloading ${path.relative('', file)}`);
   const versions = await getVersions();
   const status = await checkChanges(file, versions);
-  await fs.writeFile(file, JSON.stringify(versions, null, 2));
+  if (!dryRun) {
+    await fs.writeFile(file, JSON.stringify(versions, null, 2));
+  }
   console.log('Done');
   return status;
 };
