@@ -1,6 +1,6 @@
 # [@material-design-icons/scripts](https://github.com/marella/material-design-icons/tree/main/scripts)
 
-Scripts to download material design icons.
+Scripts to download latest material design icons.
 
 > For SVGs, see [`@material-design-icons/svg`](https://www.npmjs.com/package/@material-design-icons/svg)
 >

@@ -1,6 +1,8 @@
 # [@material-design-icons/font](https://github.com/marella/material-design-icons/tree/main/font)
 
-Icon fonts and CSS for material design icons.
+Latest icon fonts and CSS for material design icons.
+
+> This package is automatically updated, so it will always have the latest icons from Google.
 
 > This package [![install size](https://packagephobia.com/badge?p=@material-design-icons/font)](https://packagephobia.com/result?p=@material-design-icons/font) doesn't support [older browsers](https://caniuse.com/woff2) such as Internet Explorer. If you need to support those, use [`material-icons`](https://www.npmjs.com/package/material-icons) package [![install size](https://packagephobia.com/badge?p=material-icons)](https://packagephobia.com/result?p=material-icons)
 

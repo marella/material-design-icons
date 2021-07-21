@@ -1,6 +1,8 @@
 # [@material-design-icons/svg](https://github.com/marella/material-design-icons/tree/main/svg)
 
-Optimized SVGs for material design icons.
+Latest optimized SVGs for material design icons.
+
+> This package is automatically updated, so it will always have the latest icons from Google.
 
 > For icon fonts, see [`@material-design-icons/font`](https://www.npmjs.com/package/@material-design-icons/font)
 
