@@ -41,7 +41,8 @@ jobs:
 
           # Update
           npm run update
-          git commit -am 'Auto Update' || [ "$force" = "1" ] || exit 1
+          git add --all # Use 'git add --ignore-removal .' to keep deleted SVGs
+          git commit -m 'Auto Update' || [ "$force" = "1" ] || exit 1
 
           # Bump Version
           npm run version "$bump"
