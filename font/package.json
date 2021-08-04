@@ -1,6 +1,6 @@
 {
   "name": "@material-design-icons/font",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "Latest icon fonts and CSS for material design icons.",
   "browser": "index.css",
   "sass": "index.scss",
