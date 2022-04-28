@@ -1,6 +1,6 @@
 {
   "name": "@material-design-icons/svg",
-  "version": "0.10.8",
+  "version": "0.10.9",
   "description": "Latest optimized SVGs for material design icons.",
   "files": [
     "{filled,outlined,round,sharp,two-tone}/*.svg"
