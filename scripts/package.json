@@ -1,6 +1,6 @@
 {
   "name": "@material-design-icons/scripts",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Scripts to download latest material design icons.",
   "bin": "index.js",
   "files": [
