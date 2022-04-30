@@ -26,7 +26,7 @@ const AGENTS = {
   woff: 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko', // ie 11
 };
 
-const baseUrl = 'https://fonts.sandbox.google.com/css2?family=';
+const baseUrl = 'https://fonts.googleapis.com/css2?family=';
 
 export const downloadFonts = async (symbols, dir, evergreen) => {
   const type = symbols === true ? 'symbols' : 'icons';
