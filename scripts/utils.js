@@ -96,3 +96,9 @@ export const assertEquals = (actual, expected, name) => {
     throw new Error(`${name} should be '${expected}' not '${actual}'`);
   }
 };
+
+export const assertNotEquals = (actual, expected, name) => {
+  if (actual === expected) {
+    throw new Error(`${name} should not be '${expected}'`);
+  }
+};

@@ -1,17 +1,18 @@
 import * as fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { get, sortMap } from './utils.js';
+import { get, sortMap, assertNotEquals } from './utils.js';
 
-const url = 'https://fonts.google.com/metadata/icons';
+const url =
+  'https://fonts.google.com/metadata/icons?key=material_symbols&incomplete=true';
 const REMOVED = 0b100;
 const UPDATED = 0b010;
 const ADDED = 0b001;
 
-export const downloadVersions = async (dir, dryRun) => {
+export const downloadVersions = async (symbols, dir, dryRun) => {
   const file = path.resolve(dir, 'versions.json');
   console.log(`Downloading ${path.relative('', file)}`);
-  const versions = await getVersions();
+  const versions = await getVersions(symbols);
   const status = await checkChanges(file, versions);
   if (!dryRun) {
     await fs.writeFile(file, JSON.stringify(versions, null, 2));
@@ -20,11 +21,18 @@ export const downloadVersions = async (dir, dryRun) => {
   return status;
 };
 
-export const getVersions = async () => {
+export const getVersions = async (symbols) => {
+  assertNotEquals(symbols, undefined, 'symbols');
+  const type = symbols === true ? 'symbols' : 'icons';
   const { icons } = await getMetadata();
   const versions = {};
-  icons.forEach(({ name, version }) => {
-    versions[name] = version;
+  icons.forEach((icon) => {
+    for (const family of icon.unsupported_families) {
+      if (family.toLowerCase().includes(type)) {
+        return;
+      }
+    }
+    versions[icon.name] = icon.version;
   });
   return sortMap(versions);
 };

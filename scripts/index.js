@@ -20,26 +20,33 @@ const downloadCommand = program.command('download');
 
 downloadCommand
   .command('font')
+  .option('--symbols', 'download symbols instead of icons', false)
   .option('--to <directory>', 'download directory', 'font')
   .option('--evergreen', 'download fonts for evergreen browsers only')
   .action(async (options) => {
-    await downloadFonts(options.to, options.evergreen);
+    await downloadFonts(options.symbols, options.to, options.evergreen);
   });
 
 downloadCommand
   .command('svg')
+  .option('--symbols', 'download symbols instead of icons', false)
   .option('--to <directory>', 'download directory', 'svg')
   .action(async (options) => {
-    await downloadSvgs(options.to);
+    await downloadSvgs(options.symbols, options.to);
   });
 
 downloadCommand
   .command('metadata')
+  .option('--symbols', 'download symbols instead of icons', false)
   .option('--to <directory>', 'download directory', '_data')
   .option('--status', 'set exit status based on metadata changes')
   .option('--dry-run', "don't save changes")
   .action(async (options) => {
-    const status = await downloadVersions(options.to, options.dryRun);
+    const status = await downloadVersions(
+      options.symbols,
+      options.to,
+      options.dryRun
+    );
     if (options.status) {
       process.exitCode = status;
     }
@@ -48,9 +55,10 @@ downloadCommand
 program
   .command('delete')
   .command('svg')
+  .option('--symbols', 'delete symbols instead of icons', false)
   .option('--in <directory>', 'svg directory', 'svg')
   .action(async (options) => {
-    await deleteSvgs(options.in);
+    await deleteSvgs(options.symbols, options.in);
   });
 
 await program.parseAsync();

@@ -58,6 +58,14 @@ To download metadata of icons to a directory (default: `_data`), run:
 npx @material-design-icons/scripts download metadata --to <directory>
 ```
 
+### Material Symbols
+
+To download Material Symbols, run above commands with `--symbols` option:
+
+```sh
+npx @material-design-icons/scripts download font --symbols
+```
+
 ## License
 
 Material design icons are created by [Google](https://github.com/google/material-design-icons#license).

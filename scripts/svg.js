@@ -13,26 +13,33 @@ import {
   assertEquals,
 } from './utils.js';
 
-const styles = ['filled', 'outlined', 'round', 'sharp', 'two-tone'];
+const styles = {
+  icons: ['filled', 'outlined', 'round', 'sharp', 'two-tone'],
+  symbols: ['outlined', 'rounded', 'sharp'],
+};
 
-const getStyleDirs = (dir) =>
-  Object.fromEntries(styles.map((style) => [style, path.resolve(dir, style)]));
+const getStyleDirs = (symbols, dir) => {
+  const type = symbols === true ? 'symbols' : 'icons';
+  return Object.fromEntries(
+    styles[type].map((style) => [style, path.resolve(dir, style)])
+  );
+};
 
-export const deleteSvgs = async (dir) => {
-  const styleDirs = getStyleDirs(dir);
+export const deleteSvgs = async (symbols, dir) => {
+  const styleDirs = getStyleDirs(symbols, dir);
   const dirs = Object.values(styleDirs);
   console.log('Deleting SVGs');
   await remove(dirs);
   console.log('Done');
 };
 
-export const downloadSvgs = async (dir) => {
-  const styleDirs = getStyleDirs(dir);
+export const downloadSvgs = async (symbols, dir) => {
+  const styleDirs = getStyleDirs(symbols, dir);
   const dirs = Object.values(styleDirs);
   await mkdirs(dirs);
   console.log('Fetching metadata');
-  const versions = await getVersions();
-  const downloads = getDownloads(versions, styleDirs);
+  const versions = await getVersions(symbols);
+  const downloads = getDownloads(symbols, versions, styleDirs);
   console.log('::group::Downloading SVGs');
   await downloadAll(downloads, { ignoreExisting: true });
   console.log('::endgroup::');
@@ -42,14 +49,17 @@ export const downloadSvgs = async (dir) => {
   console.log('Done');
 };
 
-const getDownloads = (versions, styleDirs) => {
+const getDownloads = (symbols, versions, styleDirs) => {
+  const url = ({ theme, icon, version }) =>
+    symbols === true
+      ? `https://fonts.gstatic.com/s/i/short-term/release/materialsymbols${theme}/${icon}/default/24px.svg`
+      : `https://fonts.gstatic.com/s/i/materialicons${theme}/${icon}/v${version}/24px.svg`;
   const downloads = [];
   for (const [icon, version] of Object.entries(versions)) {
     for (const [style, dir] of Object.entries(styleDirs)) {
       const file = path.resolve(dir, `${icon}.svg`);
       const theme = style.replaceAll('filled', '').replaceAll('-', '').trim();
-      const url = `https://fonts.gstatic.com/s/i/materialicons${theme}/${icon}/v${version}/24px.svg`;
-      downloads.push([url, file]);
+      downloads.push([url({ theme, icon, version }), file]);
     }
   }
   return downloads;
