@@ -4,7 +4,7 @@ Latest optimized SVGs for material design icons.
 
 > This package is automatically updated, so it will always have the latest icons from Google.
 
-> For Material Symbols, see [`@material-symbols/svg`](https://www.npmjs.com/package/@material-symbols/svg)
+> For Material Symbols, see [`material-symbols`](https://www.npmjs.com/package/material-symbols)
 >
 > For icon fonts, see [`@material-design-icons/font`](https://www.npmjs.com/package/@material-design-icons/font)
 

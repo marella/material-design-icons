@@ -2,7 +2,7 @@
 
 Scripts to download latest Material Symbols and Material Icons.
 
-> For Material Symbols, see [`material-symbols`](https://www.npmjs.com/package/material-symbols) and [`@material-symbols/svg`](https://www.npmjs.com/package/@material-symbols/svg)
+> For Material Symbols, see [`material-symbols`](https://www.npmjs.com/package/material-symbols)
 >
 > For Material Icons, see [`@material-design-icons/font`](https://www.npmjs.com/package/@material-design-icons/font) and [`@material-design-icons/svg`](https://www.npmjs.com/package/@material-design-icons/svg)
 
