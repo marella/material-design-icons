@@ -1,10 +1,10 @@
 # [@material-design-icons/scripts](https://github.com/marella/material-design-icons/tree/main/scripts)
 
-Scripts to download latest material design icons.
+Scripts to download latest Material Symbols and Material Icons.
 
-> For SVGs, see [`@material-design-icons/svg`](https://www.npmjs.com/package/@material-design-icons/svg)
+> For Material Symbols, see [`material-symbols`](https://www.npmjs.com/package/material-symbols) and [`@material-symbols/svg`](https://www.npmjs.com/package/@material-symbols/svg)
 >
-> For icon fonts, see [`@material-design-icons/font`](https://www.npmjs.com/package/@material-design-icons/font)
+> For Material Icons, see [`@material-design-icons/font`](https://www.npmjs.com/package/@material-design-icons/font) and [`@material-design-icons/svg`](https://www.npmjs.com/package/@material-design-icons/svg)
 
 ## Installation
 
@@ -26,6 +26,14 @@ To display help, run:
 npx @material-design-icons/scripts --help
 ```
 
+### Font
+
+To download icon fonts to a directory (default: `font`), run:
+
+```sh
+npx @material-design-icons/scripts download font --to <directory>
+```
+
 ### SVG
 
 To download SVGs to a directory (default: `svg`), run:
@@ -42,14 +50,6 @@ npx @material-design-icons/scripts delete svg --in <directory>
 
 The `download svg` command will skip downloading existing SVGs. To update existing SVGs, first delete them using `delete svg` and then run `download svg`.
 
-### Font
-
-To download icon fonts to a directory (default: `font`), run:
-
-```sh
-npx @material-design-icons/scripts download font --to <directory>
-```
-
 ### Metadata
 
 To download metadata of icons to a directory (default: `_data`), run:
@@ -64,11 +64,13 @@ To download Material Symbols, run above commands with `--symbols` option:
 
 ```sh
 npx @material-design-icons/scripts download font --symbols
+npx @material-design-icons/scripts download svg --symbols
+npx @material-design-icons/scripts download metadata --symbols
 ```
 
 ## License
 
-Material design icons are created by [Google](https://github.com/google/material-design-icons#license).
+Material Symbols and Material Icons are created by [Google](https://github.com/google/material-design-icons#license).
 
 > We have made these icons available for you to incorporate into your products under the [Apache License Version 2.0][license]. Feel free to remix and re-share these icons and documentation in your products.
 We'd love attribution in your app's *about* screen, but it's not required.

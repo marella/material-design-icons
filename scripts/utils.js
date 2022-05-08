@@ -53,6 +53,19 @@ export const mkdirs = async (dirs) => {
   });
 };
 
+export const walk = async (dir, func) => {
+  const stat = await fs.lstat(dir);
+  if (stat.isFile()) {
+    await func(dir);
+    return;
+  }
+  const files = await fs.readdir(dir);
+  await map(files, async (file) => {
+    file = path.resolve(dir, file);
+    await walk(file, func);
+  });
+};
+
 export const remove = async (paths) => {
   const deleted = await del(paths);
   deleted.forEach((p) => {

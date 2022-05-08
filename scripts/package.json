@@ -1,7 +1,7 @@
 {
   "name": "@material-design-icons/scripts",
   "version": "0.3.1",
-  "description": "Scripts to download latest material design icons.",
+  "description": "Scripts to download latest Material Symbols and Material Icons.",
   "bin": "index.js",
   "files": [
     "*.js"
@@ -25,10 +25,12 @@
   },
   "homepage": "https://github.com/marella/material-design-icons/tree/main/scripts",
   "keywords": [
+    "material-symbols",
     "material-design-icons",
     "material-icons",
     "material-design",
     "material",
+    "symbols",
     "icons",
     "scripts"
   ],
