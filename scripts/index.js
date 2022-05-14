@@ -1,11 +1,19 @@
 #!/usr/bin/env node
 
 import { readFile } from 'node:fs/promises';
-import { Command } from 'commander';
+import { Command, InvalidArgumentError } from 'commander';
 
 import { downloadFonts } from './font.js';
 import { downloadSvgs, deleteSvgs } from './svg.js';
 import { downloadVersions } from './metadata.js';
+
+const choices = (values) => (value) => {
+  value = parseInt(value, 10);
+  if (!values.includes(value)) {
+    throw new InvalidArgumentError(`Allowed choices are ${values.join(', ')}.`);
+  }
+  return value;
+};
 
 const pkg = JSON.parse(
   await readFile(new URL('./package.json', import.meta.url))
@@ -31,8 +39,15 @@ downloadCommand
   .command('svg')
   .option('--symbols', 'download symbols instead of icons', false)
   .option('--to <directory>', 'download directory', 'svg')
+  .option(
+    '--weight <number>',
+    "'wght' axis for symbols",
+    choices([100, 200, 300, 400, 500, 600, 700]),
+    400
+  )
   .action(async (options) => {
-    await downloadSvgs(options.symbols, options.to);
+    const axes = { weight: options.weight };
+    await downloadSvgs(options.symbols, options.to, axes);
   });
 
 downloadCommand

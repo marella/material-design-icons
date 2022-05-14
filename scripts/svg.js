@@ -34,13 +34,13 @@ export const deleteSvgs = async (symbols, dir) => {
   console.log('Done');
 };
 
-export const downloadSvgs = async (symbols, dir) => {
+export const downloadSvgs = async (symbols, dir, axes) => {
   const styleDirs = getStyleDirs(symbols, dir);
   const dirs = Object.values(styleDirs);
   await mkdirs(dirs);
   console.log('Fetching metadata');
   const versions = await getVersions(symbols);
-  const downloads = await getDownloads(symbols, versions, styleDirs);
+  const downloads = getDownloads(symbols, versions, styleDirs, axes);
   console.log('::group::Downloading SVGs');
   await downloadAll(downloads, { ignoreExisting: true });
   console.log('::endgroup::');
@@ -49,22 +49,20 @@ export const downloadSvgs = async (symbols, dir) => {
   console.log('Done');
 };
 
-const getDownloads = async (symbols, versions, styleDirs) => {
+const getDownloads = (symbols, versions, styleDirs, axes) => {
   const variations = [];
   if (symbols === true) {
+    const { weight } = axes;
     for (const fill of [0, 1]) {
-      for (const weight of [100, 200, 300, 400, 500, 600, 700]) {
-        const axes = { fill, weight };
-        const subdir = `${fill === 0 ? '' : 'fill-'}${weight}`;
-        variations.push({ axes, subdir });
-      }
+      const axes = { fill, weight };
+      const suffix = fill === 0 ? '' : '-fill';
+      variations.push({ axes, suffix });
     }
   } else {
-    variations.push({ subdir: '' });
+    variations.push({ suffix: '' });
   }
   const downloads = [];
   for (const [style, dir] of Object.entries(styleDirs)) {
-    await mkdirs(variations.map(({ subdir }) => path.resolve(dir, subdir)));
     const theme = style.replaceAll('filled', '').replaceAll('-', '').trim();
     for (const [icon, version] of Object.entries(versions)) {
       const url = (axes) => {
@@ -77,8 +75,8 @@ const getDownloads = async (symbols, versions, styleDirs) => {
         axes = weight + fill || 'default';
         return `https://fonts.gstatic.com/s/i/short-term/release/materialsymbols${theme}/${icon}/${axes}/48px.svg`;
       };
-      for (const { axes, subdir } of variations) {
-        const file = path.resolve(dir, subdir, `${icon}.svg`);
+      for (const { axes, suffix } of variations) {
+        const file = path.resolve(dir, `${icon}${suffix}.svg`);
         downloads.push([url(axes), file]);
       }
     }

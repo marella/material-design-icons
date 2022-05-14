@@ -64,8 +64,13 @@ To download Material Symbols, run above commands with `--symbols` option:
 
 ```sh
 npx @material-design-icons/scripts download font --symbols
-npx @material-design-icons/scripts download svg --symbols
 npx @material-design-icons/scripts download metadata --symbols
+```
+
+To download SVGs for a `weight` (default: `400`), run:
+
+```sh
+npx @material-design-icons/scripts download svg --symbols --weight <number>
 ```
 
 ## License
