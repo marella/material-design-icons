@@ -103,7 +103,8 @@ const processFont = async (file) => {
         ligatureSet.forEach(({ components }) => {
           const ligature = [prefixes[i], ...components]
             .map((v) => font.stringsForGlyph(v)[0])
-            .join('');
+            .join('')
+            .toLowerCase();
           ligatures[ligature] = true;
         });
       });
