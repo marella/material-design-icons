@@ -52,11 +52,9 @@ export const downloadSvgs = async (symbols, dir, axes) => {
 const getDownloads = (symbols, versions, styleDirs, axes) => {
   const variations = [];
   if (symbols === true) {
-    const { weight } = axes;
     for (const fill of [0, 1]) {
-      const axes = { fill, weight };
       const suffix = fill === 0 ? '' : '-fill';
-      variations.push({ axes, suffix });
+      variations.push({ axes: { ...axes, fill }, suffix });
     }
   } else {
     variations.push({ suffix: '' });
@@ -69,11 +67,11 @@ const getDownloads = (symbols, versions, styleDirs, axes) => {
         if (!axes) {
           return `https://fonts.gstatic.com/s/i/materialicons${theme}/${icon}/v${version}/24px.svg`;
         }
-        let { fill, weight } = axes;
+        let { fill, weight, size } = axes;
         fill = fill === 0 ? '' : `fill${fill}`;
         weight = weight === 400 ? '' : `wght${weight}`;
         axes = weight + fill || 'default';
-        return `https://fonts.gstatic.com/s/i/short-term/release/materialsymbols${theme}/${icon}/${axes}/48px.svg`;
+        return `https://fonts.gstatic.com/s/i/short-term/release/materialsymbols${theme}/${icon}/${axes}/${size}px.svg`;
       };
       for (const { axes, suffix } of variations) {
         const file = path.resolve(dir, `${icon}${suffix}.svg`);

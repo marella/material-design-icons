@@ -45,8 +45,14 @@ downloadCommand
     choices([100, 200, 300, 400, 500, 600, 700]),
     400
   )
+  .option(
+    '--size <number>',
+    "'opsz' axis for symbols",
+    choices([20, 24, 40, 48]),
+    48
+  )
   .action(async (options) => {
-    const axes = { weight: options.weight };
+    const axes = { weight: options.weight, size: options.size };
     await downloadSvgs(options.symbols, options.to, axes);
   });
 
