@@ -58,6 +58,12 @@ To download metadata of icons to a directory (default: `_data`), run:
 npx @material-design-icons/scripts download metadata --to <directory>
 ```
 
+To generate TypeScript types in a directory (default: `font`), run:
+
+```sh
+npx @material-design-icons/scripts generate types --in <directory>
+```
+
 ### Material Symbols
 
 To download Material Symbols, run above commands with `--symbols` option:

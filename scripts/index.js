@@ -6,6 +6,7 @@ import { Command, InvalidArgumentError } from 'commander';
 import { downloadFonts } from './font.js';
 import { downloadSvgs, deleteSvgs } from './svg.js';
 import { downloadVersions } from './metadata.js';
+import { generateTypes } from './types.js';
 
 const choices = (values) => (value) => {
   value = parseInt(value, 10);
@@ -80,6 +81,15 @@ program
   .option('--in <directory>', 'svg directory', 'svg')
   .action(async (options) => {
     await deleteSvgs(options.symbols, options.in);
+  });
+
+program
+  .command('generate')
+  .command('types')
+  .option('--symbols', 'generate types for symbols instead of icons', false)
+  .option('--in <directory>', 'package root directory', 'font')
+  .action(async (options) => {
+    await generateTypes(options.symbols, options.in);
   });
 
 await program.parseAsync();
