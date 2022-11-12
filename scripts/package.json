@@ -7,11 +7,11 @@
     "*.js"
   ],
   "dependencies": {
-    "commander": "8.0.0",
-    "del": "6.0.0",
-    "fontkit": "1.8.1",
+    "commander": "8.3.0",
+    "del": "6.1.1",
+    "fontkit": "1.9.0",
     "got": "11.8.5",
-    "is-svg": "4.3.1"
+    "is-svg": "4.3.2"
   },
   "type": "module",
   "license": "Apache-2.0",
