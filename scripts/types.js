@@ -7,15 +7,15 @@ export const generateTypes = async (symbols, dir) => {
   const file = path.resolve(dir, 'index.d.ts');
   console.log(`Generating ${path.relative('', file)}`);
   const versions = await getVersions(symbols);
-  const types = getTypes(Object.keys(versions), symbols);
+  const types = getTypes(symbols, Object.keys(versions));
   await fs.writeFile(file, types);
   console.log('Done');
 };
 
-const getTypes = (icons, isSymbol) => {
+const getTypes = (isSymbol, icons) => {
   const lines = [];
   const formattedIcons = icons.map(icon => `  "${icon}"`);
-  const typeNames = isSymbol ? ['MaterialSymbols', 'MaterialSymbol'] : ['MaterialIcons', 'MaterialIcon'];
+  const typeNames = isSymbol === true ? ['MaterialSymbols', 'MaterialSymbol'] : ['MaterialIcons', 'MaterialIcon'];
 
   // type = list of all icons/sybmols
   lines.push(`type ${typeNames[0]} = [`);
