@@ -72,6 +72,7 @@ To download Material Symbols, run above commands with `--symbols` option:
 npx @material-design-icons/scripts download font --symbols
 npx @material-design-icons/scripts download svg --symbols
 npx @material-design-icons/scripts download metadata --symbols
+npx @material-design-icons/scripts generate types --symbols
 ```
 
 To customize weight (default: `400`), and optical size (default: `48`) for SVGs, use:
