@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "check": "npm run download:metadata -- --status --dry-run",
-    "update": "npm run clean && npm run download && npm run build && npm run generate",
+    "update": "npm run clean && npm run download && npm run generate && npm run build",
     "clean": "npm run clean:svg",
     "clean:svg": "npx @material-design-icons/scripts delete svg",
     "download": "npm run download:font && npm run download:svg && npm run download:metadata",
@@ -15,7 +15,7 @@
     "download:svg": "npx @material-design-icons/scripts download svg",
     "download:metadata": "npx @material-design-icons/scripts download metadata",
     "generate": "npm run generate:types",
-    "generate:types": "npx @material-design-icons/scripts generate types --in ./",
+    "generate:types": "npx @material-design-icons/scripts generate types",
     "build": "npm run build:font && npm run build:svg",
     "build:font": "npm run build -w font",
     "build:svg": "npm run build -w svg",
