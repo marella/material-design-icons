@@ -24,7 +24,11 @@ const getTypes = (isSymbol, icons) => {
   lines.push('');
 
   // type = union of all icons/symbols
-  lines.push(`export type ${typeNames[1]} = ${typeNames[0]}[number];`);
+  lines.push(`type ${typeNames[1]} = ${typeNames[0]}[number];`);
+  lines.push('');
+
+  // explicit export to avoid the following issue: https://stackoverflow.com/q/61797149
+  lines.push(`export { ${typeNames[1]} };`);
   lines.push('');
 
   return lines.join('\n');
