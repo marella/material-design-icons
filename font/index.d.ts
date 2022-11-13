@@ -2123,4 +2123,6 @@ type MaterialIcons = [
   "zoom_out_map"
 ];
 
-export type MaterialIcon = MaterialIcons[number];
+type MaterialIcon = MaterialIcons[number];
+
+export { MaterialIcon };
