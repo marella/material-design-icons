@@ -4,7 +4,9 @@
   "description": "Latest icon fonts and CSS for material design icons.",
   "browser": "index.css",
   "sass": "index.scss",
+  "types": "index.d.ts",
   "files": [
+    "index.d.ts",
     "*.{css,scss,woff2}"
   ],
   "scripts": {
