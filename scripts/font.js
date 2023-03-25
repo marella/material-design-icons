@@ -28,13 +28,13 @@ const AGENTS = {
 
 const baseUrl = 'https://fonts.googleapis.com/css2?family=';
 
-export const downloadFonts = async (symbols, dir, evergreen) => {
+export const downloadFonts = async (symbols, dir, evergreen, axes) => {
   const type = symbols === true ? 'symbols' : 'icons';
   const fontFormats = [];
   const agents = evergreen ? { woff2: AGENTS['woff2'] } : AGENTS;
   for (const name of FONTS[type]) {
     for (const format of Object.keys(agents)) {
-      fontFormats.push([name, format]);
+      fontFormats.push([name, format, axes]);
     }
   }
   const urls = await apply(getFontUrl, fontFormats);
@@ -45,9 +45,13 @@ export const downloadFonts = async (symbols, dir, evergreen) => {
   console.log('Done');
 };
 
-const getFontUrl = async (name, format) => {
+const getFontUrl = async (name, format, axes) => {
+  const fill = axes.fill ?? '0..1';
+  const weight = axes.weight ?? '100..700';
+  const grade = axes.grade ?? '-50..200';
+  const size = axes.size ?? '20..48';
   const suffix = name.toLowerCase().includes('symbols')
-    ? ':opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200'
+    ? `:opsz,wght,FILL,GRAD@${size},${weight},${fill},${grade}`
     : '';
   const url = baseUrl + name.replaceAll(' ', '+') + suffix;
   const agent = AGENTS[format];

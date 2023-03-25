@@ -32,8 +32,26 @@ downloadCommand
   .option('--symbols', 'download symbols instead of icons', false)
   .option('--to <directory>', 'download directory', 'font')
   .option('--evergreen', 'download fonts for evergreen browsers only')
+  .option('--fill <number>', "'FILL' axis for symbols", choices([0, 1]))
+  .option(
+    '--weight <number>',
+    "'wght' axis for symbols",
+    choices([100, 200, 300, 400, 500, 600, 700])
+  )
+  .option('--grade <number>', "'GRAD' axis for symbols", choices([-25, 0, 200]))
+  .option(
+    '--size <number>',
+    "'opsz' axis for symbols",
+    choices([20, 24, 40, 48])
+  )
   .action(async (options) => {
-    await downloadFonts(options.symbols, options.to, options.evergreen);
+    const axes = {
+      fill: options.fill,
+      weight: options.weight,
+      grade: options.grade,
+      size: options.size,
+    };
+    await downloadFonts(options.symbols, options.to, options.evergreen, axes);
   });
 
 downloadCommand

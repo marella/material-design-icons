@@ -2,7 +2,7 @@
 
 Scripts to download latest Material Symbols and Material Icons.
 
-> For Material Symbols, see [`material-symbols`](https://www.npmjs.com/package/material-symbols)
+> For Material Symbols, see [`material-symbols`](https://www.npmjs.com/package/material-symbols) and [`@material-symbols/svg-400`](https://www.npmjs.com/package/@material-symbols/svg-400)
 >
 > For Material Icons, see [`@material-design-icons/font`](https://www.npmjs.com/package/@material-design-icons/font) and [`@material-design-icons/svg`](https://www.npmjs.com/package/@material-design-icons/svg)
 
@@ -73,6 +73,12 @@ npx @material-design-icons/scripts download font --symbols
 npx @material-design-icons/scripts download svg --symbols
 npx @material-design-icons/scripts download metadata --symbols
 npx @material-design-icons/scripts generate types --symbols
+```
+
+To customize fill (default: `0..1`), weight (default: `100..700`), grade (default: `-50..200`), and optical size (default: `20..48`) for fonts, use:
+
+```sh
+npx @material-design-icons/scripts download font --symbols --fill <number> --weight <number> --grade <number> --size <number>
 ```
 
 To customize weight (default: `400`), and optical size (default: `48`) for SVGs, use:
