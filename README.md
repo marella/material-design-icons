@@ -2,7 +2,7 @@
 
 Latest icon fonts and optimized SVGs for material design icons.
 
-> **Note**
+> [!NOTE]
 > This repo only contains **Material Design Icons** - the old Material Design icons. Use [**Material Symbols**](https://github.com/marella/material-symbols) for the latest icons found on [Google Fonts](https://fonts.google.com/icons).
 
 This monorepo is used for publishing material design icons in the following formats:
